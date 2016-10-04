@@ -1,30 +1,32 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import axios from 'axios';
+import PostList from './PostList';
+export default class App extends React.Component {
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state={
-      posts: "all posts"
-    };
-  }
-  componentWillMount() {
-    console.log('hello will mount');
-    axios.get('http://localhost:8080/posts',function(res){
-      this.setState({
-        posts:res.posts
-      })
-    })
-    // 再此触发 Ajax 请求，
-    // 请求服务器端的 json 数据
-  }
   render () {
+    let styles={
+      header: {
+          height: '64px',
+          width: '100%',
+          backgroundColor: '#00bcd4',
+          textAlign: 'center',
+          lineHeight: '64px',
+        },
+        link: {
+          fontSize: '1.5em',
+          color: '#fff',
+          textDecoration: 'none'
+        }
+
+    }
+
   return(
     <div>
-      {this.state.posts}
-    </div>
+        <header style={styles.header}>
+          <div style={styles.link}>BORN TO CODE</div>
+        </header>
+        { this.props.children }
+      </div>
   )
   }
 }
-
-export default App;

@@ -1,12 +1,15 @@
 var express = require('express');
+var cors = require('cors');
 var  app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
+//开放CORS 关闭同源策略
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/digicity-express-api');
+mongoose.connect('mongodb://localhost:27017/posts');
 
 
 var Post = require('./models/post');
@@ -20,7 +23,7 @@ db.once('open', function() {
 
 app.get('/posts', function(req, res) {
   Post.find().exec(function(err, posts) {
-    res.json({ post: posts})
+    res.json({ posts: posts})
   });
 })
 app.post('/posts/', function(req, res) {
