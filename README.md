@@ -98,6 +98,15 @@ app.get('/', function(req, res) {
 [strkingly](strkingly.com)
 [wordpress](http://wordpress.com)
 
+### 8.测试
+
+做表单提交的测试：
+
+```
+curl -H "Content-Type: application/json" -X POST -d
+'{"title":"myTitle","content":"myContent"}' http://localhost:3000/posts
+```
+在后台模拟测试
 
 ### 错误
 1.Cannot read property 'title' of undefined

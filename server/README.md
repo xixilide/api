@@ -4,7 +4,7 @@
 ```
 npm install --save body-parser
 ```
-body-parser 是一个由 Expressjs 团队维护的 Express 中间件，它的功能是解析 HTTP 请求中的正文信息，并把这些信息存储到 req.body 对象中，比方说，客户端提交 form 表单
+    body-parser 是一个由 Expressjs 团队维护的 Express 中间件，它的功能是解析 HTTP 请求中的正文信息，并把这些信息存储到 req.body 对象中，比方说，客户端提交 form 表单
 
 ### 使用 body-parser
 
@@ -40,17 +40,17 @@ no Access control Allow Origin (访问权限允许源头)、
 
 ### 解决方法：跨源问题，添加cors。（Cross Origin resource Share 跨域资源共享）
 
-1.filter或者servlet里面(服务器端)添加response.setHeader("Access-Control-Allow-Origin", "*");
+1. filter或者servlet里面(服务器端)添加response.setHeader("Access-Control-Allow-Origin", "*");
 
-2.response.setHeader("Access-Control-Allow-Origin", "*");放到接收客户端api 的地方
+2. response.setHeader("Access-Control-Allow-Origin", "*");放到接收客户端api 的地方
 
-3.如果是servlet的话就放到get或者post方法里面，jsp页面就扔到第一行
+3. 如果是servlet的话就放到get或者post方法里面，jsp页面就扔到第一行
     在请求的java方法中加入  
     ServletActionContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
 
-4.如果是filter部署就扔到dofilter()
+4. 如果是filter部署就扔到dofilter()
 
-5.使用插件
+5. 使用插件
 
  装包 :npm i --save cors
 

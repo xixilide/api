@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import axios from 'axios';
 import PostList from './PostList';
+import { Link } from 'react-router';
 export default class App extends React.Component {
 
   render () {
@@ -23,7 +24,7 @@ export default class App extends React.Component {
   return(
     <div>
         <header style={styles.header}>
-          <div style={styles.link}>BORN TO CODE</div>
+          <Link to='/' style={styles.link}>BORN TO CODE</Link>
         </header>
         { this.props.children }
       </div>
