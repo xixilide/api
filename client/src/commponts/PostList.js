@@ -10,7 +10,7 @@ class PostList extends React.Component {
     };
   }
   componentWillMount() {
-    // console.log('hello will mount');
+
     axios.get('http://localhost:3000/posts').then(res => {
       // console.log("axios");
       this.setState({
@@ -33,11 +33,11 @@ class PostList extends React.Component {
        borderRadius: '5px',
        padding: '16px',
        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
-     },
-     title: {
+      },
+      title: {
        fontSize: '1.2em'
-     },
-     button: {
+      },
+      button: {
         display: 'block',
         margin: '30px auto',
         width: '120px',
@@ -49,18 +49,25 @@ class PostList extends React.Component {
         color: '#fff',
         textDecoration: 'none',
         borderRadius: '20px'
-  },
+      },
   link:{
+    position:'absolute',
+        right:'55px',
+       top:'20px'
+  },
+  edit:{
     position:'absolute',
         right:'16px',
        top:'20px'
   }
+
     }
     let postList = this.state.posts.map((post) => {
       return (
        <div style={styles.content} key={post._id}>
           <div style={styles.title}>{post.title}</div>
             <Link to={`/post/${post._id}`} style={styles.link}>查看</Link>
+            <Link to={`/post/${post._id}/edit`} style={styles.edit}>编辑</Link>
         </div>
             )
     },this.state.posts);

@@ -50,7 +50,7 @@ no Access control Allow Origin (访问权限允许源头)、
 
 4. 如果是filter部署就扔到dofilter()
 
-5. 使用插件
+5. 使用插件 cors 
 
  装包 :npm i --save cors
 

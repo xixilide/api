@@ -89,7 +89,7 @@ mongoose.Promise = global.Promise;
 ## 重定向 redirect
 ```js
 app.get('/', function(req, res) {
-  res.redirect('http://www.baidu.com')
+  res.redirect('cwww.baidu.com')
   //重定向到百度
         });
 ```

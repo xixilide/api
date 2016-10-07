@@ -3,18 +3,13 @@ import axios from 'axios';
 import Form from './form';
 
 class EditPost extends React.Component {
-  constructor() {
-  super();
-  this.state = {
-    post: {}
-  }
-}
+
   publishPost(content){
-    axios.post('http://localhost:3000/posts',{content})
-     .then(function(res) {
+    axios.post('http://localhost:3000/post',{content})
+     .then((res => {
        console.log(res.data.message);
        this.context.router.push("/");
-     }.bind(this))
+     }))
   }
 
 
@@ -43,6 +38,6 @@ class EditPost extends React.Component {
   }
 }
 EditPost.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: React.PropTypes.object
 };
 export default EditPost;
