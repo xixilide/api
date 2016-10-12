@@ -15,7 +15,7 @@ export default class Routes extends React.Component {
               <IndexRoute component={PostList} />
                <Route path='/write' component={NewPost} />
                  <Route path='/post/:id' component={ShowPost} />
-                 <Route path='/post/:id/new' component={EditPost} />
+                 <Route path='/posts/:id/edit' component={EditPost} />
             </Route>
           </Router>
       </div>

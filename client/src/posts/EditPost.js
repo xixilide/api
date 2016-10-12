@@ -1,18 +1,42 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import axios from 'axios';
 import Form from './form';
+import Settings from '../settings';
+import EditForm from './EditForm';
+import isEmpty from 'lodash/fp/isEmpty';
 
 class EditPost extends React.Component {
+  constructor(props) {
+     super(props);
+     this.state = {
+       post: {}
+     }
+   }
+ componentDidMount(){
+   var id = this.props.params.id;
+   console.log(id);
 
-  publishPost(content){
-    axios.post('http://localhost:3000/post',{content})
-     .then((res => {
-       console.log(res.data.message);
-       this.context.router.push("/");
-     }))
-  }
+   axios.get(`${Settings.host}/post/${id}`)
+     .then(res => {
+       this.setState({
+          post: res.data.post
+          // 10s 后得到 this.state.post 不为空
+        });
+       console.log(res);
+
+     })
+
+}
+publishPost(data){
+  //REST
+  var id = this.props.params.id;
+  axios.put(`${Settings.host}/post/${id}`,data).then(res =>{
+    console.log(res.data.message);
+      this.context.router.push('/');
+  })
 
 
+}
   render () {
     let styles={
       content: {
@@ -32,12 +56,13 @@ class EditPost extends React.Component {
   return(
     <div style={styles.content}>
           <div style={styles.title}>修改文章</div>
-          <Form label='更新文章'  publishPost={this.publishPost.bind(this)} />
-        </div>
+          { !isEmpty(this.state.post) ? <EditForm post={this.state.post} publishPost={this.publishPost.bind(this)} /> : ""}
+      </div>
   )
   }
 }
 EditPost.contextTypes = {
-  router: React.PropTypes.object
+   router: React.PropTypes.object
 };
+
 export default EditPost;

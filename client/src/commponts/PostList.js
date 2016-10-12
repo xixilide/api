@@ -1,26 +1,49 @@
 import React, { PropTypes } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router';
+import DeletePost from '../posts/DeletePost';
+import Settings from '../settings';
+import filter from 'lodash/fp/filter';
 
 class PostList extends React.Component {
   constructor() {
     super();
     this.state={
-      posts: []
+      posts: [],
+      id:''
     };
   }
   componentWillMount() {
 
-    axios.get('http://localhost:3000/posts').then(res => {
+    axios.get(`${Settings.host}/posts`).then(res => {
       // console.log("axios");
       this.setState({
         posts:res.data.posts
 
       })
     })
-    // 再此触发 Ajax 请求，
+    // 再次触发 Ajax 请求，
     // 请求服务器端的 json 数据
   }
+  //执行删除操作
+  handleClick(value) {
+  this.setState({id: value});
+  this.refs.dialog.handleOpen();
+
+  axios.delete(`${Settings.host}/posts/${this.props.id}`).then(res => {
+    this.props.removePosts(this.props.id);
+    this.setState({show: false});
+    console.log(res.data.message)
+  })
+
+}
+filterPosts(id) {
+  const posts = filter((post) => {
+    return post._id !== id
+  }, this.state.posts);
+
+  this.setState({ posts: posts })
+}
   render () {
     let styles={
       content: {
@@ -51,15 +74,11 @@ class PostList extends React.Component {
         borderRadius: '20px'
       },
   link:{
-    position:'absolute',
-        right:'55px',
-       top:'20px'
+    marginRight:'10px',
+
+
   },
-  edit:{
-    position:'absolute',
-        right:'16px',
-       top:'20px'
-  }
+
 
     }
     let postList = this.state.posts.map((post) => {
@@ -67,14 +86,16 @@ class PostList extends React.Component {
        <div style={styles.content} key={post._id}>
           <div style={styles.title}>{post.title}</div>
             <Link to={`/post/${post._id}`} style={styles.link}>查看</Link>
-            <Link to={`/post/${post._id}/edit`} style={styles.edit}>编辑</Link>
-        </div>
+            <Link to={`/posts/${post._id}/edit`} style={styles.link}>编辑</Link>
+            <Link to='javascript:;' style={styles.link} onClick={this.handleClick.bind(this, post._id)}>删除</Link>
+      </div>
             )
     },this.state.posts);
   return(
       <div>
         <Link to="/write" style={styles.button}>写文章</Link>
           { postList }
+          <DeletePost ref='dialog'　id={this.state.id} removePosts={this.filterPosts.bind(this)} />
         </div>
   )
   }
