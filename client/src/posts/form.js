@@ -89,7 +89,7 @@ handleSubmit(e){
          </div>
          <div style={styles.div}>
            <label style={styles.label}>内容</label>
-           <textarea style={[styles.input, {height: '100%'}]} rows='20' key='2' ref='content' defaultValue={this.props.post ? this.props.post.content : ''}/>
+           <textarea style={[styles.input, {height: '100%'}]} rows='20' cols='180' key='2' ref='content' defaultValue={this.props.post ? this.props.post.content : ''}/>
          </div>
          <div style={styles.actions}>
            <button type='submit' style={styles.button} >submit</button>

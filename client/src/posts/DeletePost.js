@@ -62,7 +62,7 @@ class DeletePost extends React.Component {
           <div style={styles.dialog}>
             <p>确定删除吗？</p>
             <div style={styles.actions}>
-              <div style={styles.action} key='0'>确定</div>
+              <div style={styles.action}  key='0'>确定</div>
               <div onClick={this.handleClose.bind(this)} style={styles.action} key='1'>取消</div>
             </div>
           </div>
